@@ -1,15 +1,21 @@
-<?php
-    require_once 'google/appengine/api/users/UserService.php';
-
-    use google\appengine\api\users\User;
-    use google\appengine\api\users\UserService;
-
-    $user = UserService::getCurrentUser();
-
-    if ($user) {
-        echo 'Salut, ' . $user->getNickname();
-    }
-    else {
-      header('Location: ' .
-             UserService::createLoginURL($_SERVER['REQUEST_URI']));
-    }
+<head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+<html>
+  <body>
+    <?php
+      if (array_key_exists('content', $_POST)) {
+        echo "You wrote:<pre>\n";
+        echo htmlspecialchars($_POST['content']);
+        echo "\n</pre>";
+      }
+    ?>
+    <form action="/sign" method="post">
+      <div><textarea name="content" rows="3" cols="60"></textarea></div>
+      <div><input type="submit" value="Sign Guestbook"></div>
+    </form>
+    <?php 
+    phpinfo();
+    ?>
+  </body>
+</html>
